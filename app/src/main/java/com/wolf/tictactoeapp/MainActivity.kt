@@ -106,10 +106,16 @@ class MainActivity : AppCompatActivity() {
         if (player2.contains(3) && player2.contains(6) && player2.contains(9))
             winner = 2
 
-        if(winner == 1)
+        if(winner == 1){
+            player1Wins += player1Wins+1
             Toast.makeText(this, "Player 1 Wins The game", Toast.LENGTH_LONG).show()
-        else if(winner == 2)
+            restartGame()
+        }
+        else if(winner == 2){
+            player2Wins += player2Wins+1
             Toast.makeText(this, "Player 2 Wind The Game", Toast.LENGTH_LONG).show()
+            restartGame()
+        }
     }
 
     fun autoPlay(){
@@ -139,5 +145,34 @@ class MainActivity : AppCompatActivity() {
         }
 
         playGame(cellId, buSelected)
+    }
+
+    var player1Wins = 0
+    var player2Wins = 0
+
+    fun restartGame(){
+        var activePlayer = 1
+        player1.clear()
+        player2.clear()
+
+        for (index in 1..9){
+            var buSlected:Button?
+            buSlected = when(index){
+                1 -> findViewById(R.id.button1)
+                2 -> findViewById(R.id.button2)
+                3 -> findViewById(R.id.button3)
+                4 -> findViewById(R.id.button4)
+                5 -> findViewById(R.id.button5)
+                6 -> findViewById(R.id.button6)
+                7 -> findViewById(R.id.button7)
+                8 -> findViewById(R.id.button8)
+                9 -> findViewById(R.id.button9)
+                else -> findViewById(R.id.button1)
+            }
+
+            buSlected!!.text = ""
+            buSlected!!.setBackgroundResource(R.color.white)
+            buSlected!!.isEnabled = true
+        }
     }
 }
